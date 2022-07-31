@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd"  >
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>This is simple admin page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
+    <style >
+
+button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+
+    <script type="application/javascript">
+
+<!--<script th:inline="javascript" >-->
+
+
+<!--$('#roles').on('change', function() {-->
+<!--    var value = $(this).val();-->
+<!--        $('#hidrole').val(value);-->
+<!--        alert();-->
+<!--})-->
+<!--$('#members').on('change', function() {-->
+<!--    var value = $(this).val();-->
+<!--        $('#hidmem').val(value);-->
+
+<!--})-->
+
+</script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Logout <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+
+<h1 class="text-center" >Admininstrator page</h1>
+    <p >
+        Hey there!<p th:text="${qname}"></p>
+
+    <p>you belong to <p th:text="${role}"></p>
+    </p>
+    </p>
+
+    <button type="button"  th:onclick="|window.location.href='/add-to-CF'|"> add-to-CF</button>
+    <button type="button"  th:onclick="|window.location.href='/add-to-CM'|"> add-to-CM</button>
+    <button type="button"  th:onclick="|window.location.href='/add-to-CC'|"> add-to-CC</button>
+    <p>
+        <p th:text="${Message}"></p>
+    </p>
+
+
+    <form th:action="@{/add-uid-to-group}" id="selform"  method="post" enctype="multipart/form-data">
+<!--  removed all th field and id tag was causing problems for controller grab-->
+        <label> Users: </label><select th:name="members">
+        <option value="Select" text="Select option">Select option</option>
+    <option  th:each="person : ${Person}"   th:value="${person.getUid()}"
+             th:text="${person.getFullName()}">person</option>
+</select >
+
+        <label> Groups: </label>
+        <select th:name="roles">
+        <option value="Select" text="Select option">Select option</option>
+        <option  th:each="group : ${Group}"   th:value="${group.getName()}"
+                 th:text=" ${group.getName()}">group</option>
+    </select >
+        <input  id="hidrole" type="hidden" name="hidrole"  />
+        <input  id="hidmem" type="hidden" name="hidmem" />
+<!--    <button type="button" th:onclick="|window.location.href='/add-uid-to-group'|">Add to group</button>-->
+        <button  type="submit" name="action" value="assigngr">Group Set to User</button>
+
+        <label>Create Permission</label> <input  th:name="grname"  />
+        <button name="action" value="createpr" type="submit">Make new Permision</button>
+
+        <label> Permissions: </label>
+        <select th:name="permits"  >
+            <option value="Select" text="Select option">Select option</option>
+            <option th:each="permit : ${Permits}" th:value="${permit.getName()}"
+                    th:text="${permit.getName()}">perms</option>
+        </select >
+           <!-- th:field="*{Permits}"-->
+
+        <button name="action" value="assignpr" type="submit">Assign Permision to User</button>
+    </form>
+
+
+
+    <!--    <table>-->
+    <!--        <tr>-->
+    <!--            <th>Name</th>-->
+    <!--            <th>Skills</th>-->
+    <!--            <th></th>-->
+    <!--        </tr>-->
+    <!--        <tr th:each="developer : ${developers}">-->
+    <!--            <td th:text="${developer.firstName + ' ' + developer.lastName}"></td>-->
+    <!--            <td>-->
+    <!--				<span th:each="skill,iterStat : ${developer.skills}">-->
+    <!--					<span th:text="${skill.label}"/><th:block th:if="${!iterStat.last}">,</th:block>-->
+    <!--				</span>-->
+    <!--            </td>-->
+    <!--            <td>-->
+    <!--                <a th:href="@{/developer/{id}(id=${developer.id})}">view</a>-->
+    <!--            </td>-->
+    <!--        </tr>-->
+    <!--    </table>-->
+
+
+
+
+
+</div>
+
+</body>
+</html>

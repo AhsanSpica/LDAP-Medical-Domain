@@ -1,0 +1,9 @@
+com\test\springldaptest\springldaptest\RestControllerModule.class
+com\test\springldaptest\springldaptest\HouseResource$PersonContextMapper.class
+com\test\springldaptest\springldaptest\WebSecurityConfig.class
+com\test\springldaptest\springldaptest\Model\clinic.class
+com\test\springldaptest\springldaptest\Model\Group.class
+com\test\springldaptest\springldaptest\SpringLdapTestApplication.class
+com\test\springldaptest\springldaptest\HouseResource.class
+com\test\springldaptest\springldaptest\HouseResource$GroupContextMapper.class
+com\test\springldaptest\springldaptest\Model\Person.class
